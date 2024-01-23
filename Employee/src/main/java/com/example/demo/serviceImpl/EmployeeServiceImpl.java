@@ -14,66 +14,63 @@ import com.example.demo.service.EmployeeService;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-	@Autowired
-	EmployeeRepository employeeRepository;
+    @Autowired
+    EmployeeRepository employeeRepository;
 
-	List<Employee> list;
+    List<Employee> list;
 
-	@Override
-	public Employee getEmployee(Long employeeId) {
-		Employee employee = new Employee();
-		employee =  employeeRepository.findByEmpId(employeeId);
+    @Override
+    public Employee getEmployee(Long employeeId) {
+        Employee employee = new Employee();
+        employee = employeeRepository.findByEmpId(employeeId);
 
-				if(employee==null){
-					System.out.print("++++++++++++++++++++++++++++++++++++++");
-					throw new UserException(HttpStatus.NOT_FOUND,UserConstant.Record_Not_Found);
-				}
+        if (employee == null) {
+            throw new UserException(HttpStatus.NOT_FOUND, UserConstant.Record_Not_Found);
+        }
 
-				return  employeeRepository.findByEmpId(employeeId);
-	}
+        return employeeRepository.findByEmpId(employeeId);
+    }
 
-	//
-	@Override
-	public Employee saveEmployee(Employee employee) {
-		if (employee.getEmpId() == null || employee.getEmpName().isEmpty() || employee.getEmpName().length() == 0 || employee.getCity().isEmpty() || employee.getCity().length() == 0) {
-			throw new UserException(HttpStatus.BAD_REQUEST, UserConstant.Empty_Fields);
-		}
-		return employeeRepository.save(employee);
-}
-	
-	@Override
-	public Employee updateEmployee(Employee employee){
+    @Override
+    public Employee saveEmployee(Employee employee) {
+        if (employee.getEmpId() == null || employee.getEmpName().isEmpty() || employee.getEmpName().length() == 0 || employee.getCity().isEmpty() || employee.getCity().length() == 0) {
+            throw new UserException(HttpStatus.BAD_REQUEST, UserConstant.Empty_Fields);
+        }
+        return employeeRepository.save(employee);
+    }
 
-		Employee emp = new Employee();
+    @Override
+    public Employee updateEmployee(Employee employee) {
 
-			if(employee.getEmpId()==null||employee.getEmpName().isEmpty()||employee.getEmpName().length()==0 ||employee.getCity().isEmpty()||employee.getCity().length()==0){
-				throw new UserException(HttpStatus.BAD_REQUEST,UserConstant.Empty_Fields);
-			}
+        Employee emp = new Employee();
 
-		emp.setEmpId(employee.getEmpId());
-		emp.setEmpName(employee.getEmpName());
-		emp.setCity(employee.getCity());
-			return employeeRepository.save(emp);
-		}
+        if (employee.getEmpId() == null || employee.getEmpName().isEmpty() || employee.getEmpName().length() == 0 || employee.getCity().isEmpty() || employee.getCity().length() == 0) {
+            throw new UserException(HttpStatus.BAD_REQUEST, UserConstant.Empty_Fields);
+        }
 
-	@Override
-	public String deleteEmployee(long employeeId) {
-		
-		  employeeRepository.deleteById(employeeId);
-		  return "deleted successfully";
-	}
-	@Override
-	public List<Employee> saveMultipleRecords(List<Employee> employee) {
-		return employeeRepository.saveAll(employee);
-		
-	}
+        emp.setEmpId(employee.getEmpId());
+        emp.setEmpName(employee.getEmpName());
+        emp.setCity(employee.getCity());
+        return employeeRepository.save(emp);
+    }
 
-	@Override
-	public List<Employee> getListOfEmployees() {
+    @Override
+    public String deleteEmployee(long employeeId) {
 
-		return employeeRepository.findAll();
-	}
+        employeeRepository.deleteById(employeeId);
+        return "deleted successfully";
+    }
 
-	
+    @Override
+    public List<Employee> saveMultipleRecords(List<Employee> employee) {
+        return employeeRepository.saveAll(employee);
+
+    }
+
+    @Override
+    public List<Employee> getListOfEmployees() {
+
+        return employeeRepository.findAll();
+    }
 
 }

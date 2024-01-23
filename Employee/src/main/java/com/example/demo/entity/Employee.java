@@ -6,19 +6,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Entity
-@Table(name="Employee")
+@Table(name = "Employee")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long empId;
-	private String empName;
-	private String city;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long empId;
+    private String empName;
+    private String city;
 
 }

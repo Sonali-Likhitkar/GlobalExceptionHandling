@@ -20,7 +20,6 @@ public class EmployeeController {
 	@GetMapping("/getListOfEmployees")
 	public List<Employee> getListOfEmployees() {
 		return employeeService.getListOfEmployees();
-
 	}
 
 	@PostMapping("/multipleStudentSave")
@@ -30,7 +29,6 @@ public class EmployeeController {
 
 	@GetMapping("/employees/{employeeId}")
 	public Employee getEmployee(@PathVariable Long employeeId) {
-
 		return employeeService.getEmployee(employeeId);
 	}
 

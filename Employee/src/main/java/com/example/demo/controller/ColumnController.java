@@ -17,21 +17,19 @@ import java.util.Map;
 @CrossOrigin("*")
 public class ColumnController {
     @Autowired
-    private ColumnsService  columnsService;
+    private ColumnsService columnsService;
 
     @PostMapping("/Column/upload")
-    public ResponseEntity<?> upload(@RequestParam("file")MultipartFile file){
-        if(Helper.checkExcelFormat(file)){
+    public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) {
+        if (Helper.checkExcelFormat(file)) {
             this.columnsService.save(file);
-            return ResponseEntity.ok(Map.of("message","file is uploaded and Data is save to DB" ));
+            return ResponseEntity.ok(Map.of("message", "file is uploaded and Data is save to DB"));
         }
-        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please upload excel file ");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please upload excel file ");
     }
 
     @GetMapping("/getAll")
-    public List<Column> getAllColumns(){
+    public List<Column> getAllColumns() {
         return this.columnsService.getAllColumns();
     }
-
-
 }

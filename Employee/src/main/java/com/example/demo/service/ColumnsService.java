@@ -14,15 +14,17 @@ import java.util.List;
 public class ColumnsService {
     @Autowired
     private ColumnRepo columnRepo;
-    public void  save(MultipartFile file){
-        try{
-            List<Column>columns= Helper.convertExcelToListOfColumns(file.getInputStream());
+
+    public void save(MultipartFile file) {
+        try {
+            List<Column> columns = Helper.convertExcelToListOfColumns(file.getInputStream());
             columnRepo.saveAll(columns);
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public List<Column> getAllColumns(){
+
+    public List<Column> getAllColumns() {
 
         return columnRepo.findAll();
 
